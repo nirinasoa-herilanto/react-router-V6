@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { json, useLoaderData } from 'react-router-dom';
 
 import EventsList from '../components/EventsList';
 
@@ -20,7 +20,7 @@ export const loader = async () => {
   const res = await fetch('http://localhost:8000/events');
 
   if (!res.ok) {
-    throw new Error('Something went wrong!!!');
+    throw json({ message: 'Could not fetch events !!!' }, { status: 500 });
   }
 
   const data = await res.json();
