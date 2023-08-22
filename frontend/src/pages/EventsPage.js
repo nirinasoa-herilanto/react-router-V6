@@ -1,20 +1,28 @@
 import React from 'react';
+import { useLoaderData } from 'react-router-dom';
+
 import EventsList from '../components/EventsList';
 
-const eventsData = [
-  {
-    id: 'e-1',
-    title: 'Learning React Router V6',
-    content: 'Content of React Router V6 and his features ...',
-  },
-];
-
 const EventsPage = () => {
+  const data = useLoaderData();
+
   return (
     <section>
-      <EventsList events={eventsData} />
+      <EventsList events={data.events} />
     </section>
   );
+};
+
+export const loader = async () => {
+  const res = await fetch('http://localhost:8000/events');
+
+  if (!res.ok) {
+    throw new Error('Something went wrong!!!');
+  }
+
+  const data = await res.json();
+
+  return data;
 };
 
 export default EventsPage;
