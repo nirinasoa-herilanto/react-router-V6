@@ -1,5 +1,5 @@
 import React from 'react';
-import { json, useLoaderData, useRouteLoaderData } from 'react-router-dom';
+import { json, useRouteLoaderData } from 'react-router-dom';
 
 import EventItem from '../components/EventItem';
 
