@@ -13,6 +13,9 @@ const EventsPage = () => {
   );
 };
 
+// - always executed on the client side, not on the server, happen on the browser
+// - we can use browser API inside
+// Not allowed: uses of React Hook
 export const loader = async () => {
   const res = await fetch('http://localhost:8000/events');
 
