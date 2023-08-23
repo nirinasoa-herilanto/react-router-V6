@@ -1,9 +1,16 @@
 import React from 'react';
 
+import PageContent from '../components/PageContent';
+
 const HomePage = () => {
+  const title = 'Welcome!';
+  const message = 'Discover all amazing events';
+
   return (
     <section>
-      <h1>HomePage</h1>
+      <PageContent title={title}>
+        <p>{message}</p>
+      </PageContent>
     </section>
   );
 };
