@@ -1,5 +1,7 @@
 import {
   Form,
+  json,
+  redirect,
   useActionData,
   useNavigate,
   useNavigation,
@@ -79,5 +81,42 @@ function EventForm({ method, event }) {
     </Form>
   );
 }
+
+// like loader(), but allow to post/update data from server
+export const action = async ({ request, params }) => {
+  const data = await request.formData();
+
+  const inputEvent = {
+    title: data.get('title'),
+    image: data.get('image'),
+    date: data.get('date'),
+    description: data.get('description'),
+  };
+
+  let url = 'http://localhost:8000/events';
+
+  if (request.method === 'PATCH') {
+    const eventId = params.eventId;
+    url = `http://localhost:8000/events/${eventId}`;
+  }
+
+  const res = await fetch(url, {
+    method: request.method,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(inputEvent),
+  });
+
+  if (res.status === 422) {
+    return res;
+  }
+
+  if (!res.ok) {
+    throw json({ message: 'Can not saved event' }, { status: 500 });
+  }
+
+  return redirect('/events');
+};
 
 export default EventForm;

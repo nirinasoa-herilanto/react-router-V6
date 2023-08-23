@@ -9,7 +9,7 @@ const EditEventPage = () => {
   return (
     <section>
       <h1 style={{ textAlign: 'center' }}>Edit event</h1>
-      <EventForm event={data.event} />
+      <EventForm method={'PATCH'} event={data.event} />
     </section>
   );
 };
