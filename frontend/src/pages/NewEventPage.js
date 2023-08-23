@@ -30,6 +30,10 @@ export const action = async ({ request, params }) => {
     body: JSON.stringify(inputEvent),
   });
 
+  if (res.status === 422) {
+    return res;
+  }
+
   if (!res.ok) {
     throw json({ message: 'Can not saved event' }, { status: 500 });
   }
