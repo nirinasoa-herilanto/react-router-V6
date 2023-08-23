@@ -29,7 +29,7 @@ import EventDetailPage, {
   loader as eventDetailLoader,
 } from './pages/EventDetailPage';
 import EditEventPage from './pages/EditEventPage';
-import NewEventPage from './pages/NewEventPage';
+import NewEventPage, { action as newEventAction } from './pages/NewEventPage';
 import RootLayout from './components/Layout/RootLayout';
 import EventsLayout from './components/Layout/EventsLayout';
 import ErrorPage from './pages/ErrorPage';
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         element: <EventsLayout />,
         children: [
           { index: true, element: <EventsPage />, loader: eventsLoader },
-          { path: 'new', element: <NewEventPage /> },
+          { path: 'new', element: <NewEventPage />, action: newEventAction },
           {
             path: ':eventId',
             id: 'event-detail',
